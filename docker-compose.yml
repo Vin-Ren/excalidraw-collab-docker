@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  excalidraw:
+    build:
+      context: .
+      dockerfile: excalidraw.Dockerfile
+      args:
+        VITE_APP_WS_SERVER_URL: ${VITE_APP_WS_SERVER_URL}
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.excalidraw.rule=Host(`${EXCALIDRAW_DOMAIN}`)"
+      - "traefik.http.routers.excalidraw.entrypoints=websecure"
+      - "traefik.http.routers.excalidraw.tls=true"
+      - "traefik.http.services.excalidraw.loadbalancer.server.port=80"
+
+  collab:
+    build:
+      context: .
+      dockerfile: collab.Dockerfile
+    ports:
+      - "${COLLAB_PORT:-8081}:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.collab.rule=Host(`${COLLAB_DOMAIN}`)"
+      - "traefik.http.routers.collab.entrypoints=websecure"
+      - "traefik.http.routers.collab.tls=true"
+      - "traefik.http.services.collab.loadbalancer.server.port=80"
