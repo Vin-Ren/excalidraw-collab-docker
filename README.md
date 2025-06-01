@@ -7,6 +7,26 @@ This project lets you self-host [Excalidraw](https://excalidraw.com/) along with
 
 ---
 
+Table of Contents
+=================
+
+* [🖊️ Excalidraw Self-Hosting with Collab Server](#️-excalidraw-self-hosting-with-collab-server)
+* [Table of Contents](#table-of-contents)
+   * [📦 Project Structure](#-project-structure)
+   * [🚀 Deploying with Dokploy](#-deploying-with-dokploy)
+      * [Directly Building on Dokploy](#directly-building-on-dokploy)
+      * [Building on Local, Avoid Build on Dokploy](#building-on-local-avoid-build-on-dokploy)
+         * [1. Building Locally](#1-building-locally)
+         * [2. Tagging and Uploading the Image](#2-tagging-and-uploading-the-image)
+         * [3. Setting up the Service Dokploy](#3-setting-up-the-service-dokploy)
+   * [🧪 Local Self-Hosting](#-local-self-hosting)
+   * [🧼 Stopping the stack](#-stopping-the-stack)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+
+---
+
+
 ## 📦 Project Structure
 
 ```
@@ -68,6 +88,7 @@ excalidraw-collab-docker-excalidraw     latest    abcdef012345   1 minutes ago  
 
 We are interested in the image named `excalidraw-collab-docker-excalidraw`. This might be different if you cloned this repository with a different directory name, however, the image name should have `-excalidraw` as its suffix.
 
+#### 2. Tagging and Uploading the Image
 Then depending on where you'd like to upload this, either a public or a private registry, the procedure of login could be different. Here I'll give an example of using dockerhub.
 
 Register yourself on dockerhub first. Then navigate to `Account Settings > Personal access token`, then create one and follow the instructions there to log in on your local device.
@@ -85,6 +106,7 @@ docker push vinren/excalidraw-collab:latest
 Your excalidraw image is now up on dockerhub as!
 
 
+#### 3. Setting up the Service Dokploy
 Now we need to use that image for deployment on dokploy.
 Create a new Compose Service, then select your fork of this repository and change `Compose Path` from `./docker-compose.yml` to `./docker-compose-self-built.yml`.
 
