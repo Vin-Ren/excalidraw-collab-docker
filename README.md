@@ -33,11 +33,7 @@ COLLAB_DOMAIN=collab.example.com
 VITE_APP_WS_SERVER_URL=wss://collab.example.com # Must be reachable from clients!!!
 ```
 
-If you find that docker keeps caching your images with incorrect env, go to the advanced section and replace the build command with the following:
-```sh
-CACHE_INVALIDATOR=$(date +%s) docker compose -p <your-app-slug> -f ./docker-compose.yml up -d --build --remove-orphans --force-recreate
-```
-You can find your app slug from the default command. For example, if your default command is: `docker compose -p test-excalidraw-jmnnnr -f ./docker-compose.yml up -d --build --remove-orphans` then your app slug is **`test-excalidraw-jmnnnr`**.
+If you find that docker keeps caching your images with incorrect env, you can make use of an additional environment variable, **`CACHE_INVALIDATOR`**. Simply navigate to the environment variables tab again, and put a random value as the value of that variable in there, a nice one would be the current timestamp, as shown used in the section below for the same purpose.
 
 > 🔁 The frontend must be configured to connect to the correct WebSocket URL (`VITE_APP_WS_SERVER_URL`) — typically `wss://collab.example.com`.
 
