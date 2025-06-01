@@ -7,6 +7,7 @@ services:
       dockerfile: excalidraw.Dockerfile
       args:
         VITE_APP_WS_SERVER_URL: ${VITE_APP_WS_SERVER_URL}
+        CACHE_INVALIDATOR: ${CACHE_INVALIDATOR}
     ports:
       - "${FRONTEND_PORT:-8080}:80"
     labels:

@@ -33,6 +33,12 @@ COLLAB_DOMAIN=collab.example.com
 VITE_APP_WS_SERVER_URL=wss://collab.example.com # Must be reachable from clients!!!
 ```
 
+If you find that docker keeps caching your images with incorrect env, go to the advanced section and replace the build command with the following:
+```sh
+CACHE_INVALIDATOR=$(date +%s) docker compose -p <your-app-slug> -f ./docker-compose.yml up -d --build --remove-orphans --force-recreate
+```
+You can find your app slug from the default command. For example, if your default command is: `docker compose -p test-excalidraw-jmnnnr -f ./docker-compose.yml up -d --build --remove-orphans` then your app slug is **`test-excalidraw-jmnnnr`**.
+
 > 🔁 The frontend must be configured to connect to the correct WebSocket URL (`VITE_APP_WS_SERVER_URL`) — typically `wss://collab.example.com`.
 
 ---
@@ -48,7 +54,14 @@ docker compose --env-file .env.local up --build -d
 * Frontend available at: [http://localhost:8080](http://localhost:8080)
 * Collab server available at: [ws://localhost:8081](ws://localhost:8081)
 - The --env-file flag is optional. By default it will use .env
-- remove -d flag if you want to run this stack in the foreground.
+- Remove -d flag if you want to run this stack in the foreground.
+
+However if you find that docker keep caching your images, you can try:
+```
+CACHE_INVALIDATOR=$(date +%s) docker compose up --build --force-recreate
+```
+This prevents docker from reusing its cache, which might solve your problems, e.g. Changes in environment variables.
+
 ---
 
 ## 🧼 Stopping the stack
