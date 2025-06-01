@@ -26,7 +26,12 @@ When deploying with [Dokploy](https://dokploy.com/), Traefik should automaticall
 
 You should choose the compose service and import this repository as your source.
 
-Make sure to pass all the environment variables you'd like to change at the environment tab.
+Make sure to pass all the environment variables you'd like to change at the environment tab. These are the required environment variables if you are deploying with dokploy:
+```sh
+EXCALIDRAW_DOMAIN=draw.example.com
+COLLAB_DOMAIN=collab.example.com
+VITE_APP_WS_SERVER_URL=wss://collab.example.com # Must be reachable from clients!!!
+```
 
 > 🔁 The frontend must be configured to connect to the correct WebSocket URL (`VITE_APP_WS_SERVER_URL`) — typically `wss://collab.example.com`.
 
