@@ -42,7 +42,7 @@ VITE_APP_WS_SERVER_URL=wss://collab.example.com # Must be reachable from clients
 You can run the stack locally with port mappings:
 
 ```bash
-docker compose up --env-file .env.local --build -d
+docker compose --env-file .env.local up --build -d
 ```
 
 * Frontend available at: [http://localhost:8080](http://localhost:8080)

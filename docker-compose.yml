@@ -17,9 +17,7 @@ services:
       - "traefik.http.services.excalidraw.loadbalancer.server.port=80"
 
   collab:
-    build:
-      context: .
-      dockerfile: collab.Dockerfile
+    image: excalidraw/excalidraw-room
     ports:
       - "${COLLAB_PORT:-8081}:80"
     labels:
